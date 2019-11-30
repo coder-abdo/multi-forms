@@ -1,10 +1,16 @@
 import React from "react";
 import { Navbar } from "./components/Navbar.jsx";
+import { Aside } from "./components/Aside.jsx";
+import { Home } from "./components/Home.jsx";
+import styles from "./styles/app.css";
 export const App = () => {
   return (
-    <div>
+    <>
       <Navbar />
-      <h1>hello webpack 4 from scrach</h1>
-    </div>
+      <div className={styles.container}>
+        <Aside />
+        <Home />
+      </div>
+    </>
   );
 };

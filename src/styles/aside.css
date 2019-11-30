@@ -1,0 +1,21 @@
+.aside {
+  color: var(--dark-grey);
+}
+.listItem {
+  padding: 2vh 2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+  &:not(:last-child) {
+    margin-bottom: 2vh;
+  }
+}
+.active {
+  background-color: var(--white);
+  border-left: 2px solid var(--green);
+  color: var(--green);
+  font-weight: 700;
+}

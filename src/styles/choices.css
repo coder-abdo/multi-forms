@@ -1,0 +1,25 @@
+.title {
+  color: var(--dark);
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 1.8vw;
+}
+.container {
+  background-color: var(--white);
+  padding: 2vh 2vw 4vh;
+}
+.inputContainer {
+  font-size: 1.6vw;
+  color: var(--dark-grey);
+  margin-top: 3vh;
+  .input[type="radio"] {
+    opacity: 0;
+    visibility: hidden;
+    &:checked + .icon {
+      color: var(--green);
+    }
+  }
+  .icon {
+    margin-left: 1vw;
+  }
+}

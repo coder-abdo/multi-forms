@@ -2,7 +2,7 @@
   --grey: #ddd;
   --green: #199619;
   --white: #fff;
-  --gray: #eee;
+  --gray: #f1f3f5;
   --dark: #333333;
   --dark-grey: #aaa;
   --gold: orange;
@@ -33,4 +33,11 @@ ul,
 li,
 ol {
   list-style: none;
+}
+.container {
+  display: grid;
+  grid-template-columns: 20vw 60vw;
+  grid-gap: 2vw;
+  padding: 2vh 2vw;
+  min-height: 70vh;
 }
