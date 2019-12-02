@@ -1,0 +1,59 @@
+.parent {
+  color: var(--dark-grey);
+}
+.container {
+  padding: 0 2vw;
+  text-transform: capitalize;
+}
+.title {
+  font-size: 3vw;
+  margin-bottom: 3vh;
+  color: var(--dark-grey);
+  text-transform: capitalize;
+}
+label:hover {
+  cursor: pointer;
+}
+.inputContainer {
+  display: flex;
+}
+.input[type="radio"] {
+  opacity: 0;
+  visibility: hidden;
+  &:checked + .icon {
+    color: var(--green);
+  }
+}
+.icon {
+  margin-right: 1vw;
+  color: var(--dark-grey);
+}
+.name,
+.email,
+.tel {
+  min-width: 25vw;
+  width: 100%;
+  padding: 2vh 2vw;
+  font-size: 1.4vw;
+  border: 1px solid var(--gray);
+  margin-top: 2vh;
+}
+.name {
+  margin-bottom: 2vh;
+}
+.submitBtn {
+  padding: 2vh 4vw;
+  font-size: 1.4vw;
+  display: block;
+  margin: 2vh auto 0;
+  border: 1px solid var(--dark-grey);
+  border-radius: 3px;
+  color: var(--dark);
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+  &:hover {
+    cursor: pointer;
+    color: var(--white);
+    background-color: var(--green);
+  }
+}

@@ -1,68 +1,59 @@
-import React, { useState, useContext } from "react";
-import { Store, COST } from "../Store.js";
+import React, { useContext } from "react";
+import { Store, ADD_SERVICES, REMOVE_SERVICES } from "../Store.js";
 import { FaCheckCircle } from "react-icons/fa";
 import styles from "../styles/choices.css";
 export const MobileApplication = () => {
   const { state, dispatch } = useContext(Store);
-  const [cost, setCost] = useState(0);
+  const labels = [
+    {
+      id: "uxWirePrototype",
+      text: "UX Wireframing and Prototyping (700$)",
+      value: 700
+    },
+    {
+      id: "uiDesign",
+      text: "UI Design (700$)",
+      value: 700
+    },
+    {
+      id: "appDevelopment",
+      text: "Application Development (1500$)",
+      value: 1500
+    },
+    {
+      id: "mobBackDevelopment",
+      text: "Backend Development (3000$)",
+      value: 3000
+    }
+  ];
   const handleChange = e => {
-    setCost(+e.target.value);
-    dispatch({
-      type: COST,
-      payload: cost
-    });
+    console.log("yes");
+    if (e.target.checked) {
+      dispatch({
+        type: ADD_SERVICES,
+        payload: { id: e.target.id, val: e.target.value }
+      });
+    } else {
+      dispatch({ type: REMOVE_SERVICES, payload: e.target.id });
+    }
   };
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>what services do you need?</h2>
-      <div className={styles.inputContainer}>
-        <label htmlFor="wireframe">UX Wireframing and Prototyping (700$)</label>
-        <input
-          className={styles.input}
-          type="radio"
-          name="mobile"
-          id="wireframe"
-          value="700"
-          onChange={handleChange}
-        />
-        <FaCheckCircle className={styles.icon} />
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="ui"> UI Design (700$)</label>
-        <input
-          className={styles.input}
-          type="radio"
-          name="mobile"
-          id="ui"
-          value="700"
-          onChange={handleChange}
-        />
-        <FaCheckCircle className={styles.icon} />
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="appDev">Application Development (1500$)</label>
-        <input
-          className={styles.input}
-          type="radio"
-          name="mobile"
-          id="appDev"
-          value="1500"
-          onChange={handleChange}
-        />
-        <FaCheckCircle className={styles.icon} />
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="bkDev">Backend Development (3000$)</label>
-        <input
-          className={styles.input}
-          type="radio"
-          name="mobile"
-          id="bkDev"
-          value="3000"
-          onChange={handleChange}
-        />
-        <FaCheckCircle className={styles.icon} />
-      </div>
+      {labels.map(label => (
+        <div className={styles.inputContainer}>
+          <label htmlFor={label.id}>{label.text}</label>
+          <input
+            type="checkbox"
+            value={label.value}
+            id={label.id}
+            className={styles.input}
+            onChange={handleChange}
+            checked={state.services.find(service => service.id === label.id)}
+          />
+          <FaCheckCircle className={styles.icon} />
+        </div>
+      ))}
     </div>
   );
 };

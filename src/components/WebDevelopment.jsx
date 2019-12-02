@@ -1,21 +1,65 @@
-import React, { useState, useContext } from "react";
-import { Store, COST } from "../Store.js";
+import React, { useContext } from "react";
+import { Store, ADD_SERVICES, REMOVE_SERVICES } from "../Store.js";
 import { FaCheckCircle } from "react-icons/fa";
 import styles from "../styles/choices.css";
 export const WebDevelopment = () => {
   const { state, dispatch } = useContext(Store);
-  const [cost, setCost] = useState(0);
   const handleChange = e => {
-    setCost(+e.target.value);
-    dispatch({
-      type: COST,
-      payload: cost
-    });
+    if (e.target.checked) {
+      dispatch({
+        type: ADD_SERVICES,
+        payload: { id: e.target.id, val: e.target.value }
+      });
+    } else {
+      dispatch({ type: REMOVE_SERVICES, payload: e.target.id });
+    }
   };
+  const labels = [
+    {
+      id: "uxWireWeb",
+      text: " UX Wireframing and Prototyping (500$)",
+      value: 500
+    },
+    {
+      id: "uiDesignWeb",
+      text: "UI Design (1000$)",
+      value: 1000
+    },
+    {
+      id: "uiDevelopmentWeb",
+      text: "UI Development (1000$)",
+      value: 1000
+    },
+    {
+      id: "frontDevelopment",
+      text: "Frontend Development (2000$)",
+      value: 2000
+    },
+    {
+      id: "backDevelopmentWeb",
+      text: " Backend Development (2000$)",
+      value: 2000
+    }
+  ];
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>what services do you need?</h2>
-      <div className={styles.inputContainer}>
+      {labels.map(label => (
+        <div className={styles.inputContainer}>
+          <label htmlFor={label.id}>{label.text}</label>
+          <input
+            type="checkbox"
+            id={label.id}
+            className={styles.input}
+            onChange={handleChange}
+            value={label.value}
+            checked={state.services.find(service => service.id === label.id)}
+          />
+          <FaCheckCircle className={styles.icon} />
+        </div>
+      ))}
+
+      {/* <div className={styles.inputContainer}>
         <label htmlFor="wireframe">UX Wireframing and Prototyping (500$)</label>
         <input
           className={styles.input}
@@ -74,7 +118,7 @@ export const WebDevelopment = () => {
           onChange={handleChange}
         />
         <FaCheckCircle className={styles.icon} />
-      </div>
+      </div> */}
     </div>
   );
 };

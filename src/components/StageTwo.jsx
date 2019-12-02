@@ -3,15 +3,15 @@ import { Store } from "../Store.js";
 import { WebDevelopment } from "./WebDevelopment.jsx";
 import { BrandIdentity } from "./BrandIdentity.jsx";
 import { MobileApplication } from "./MobileApplication.jsx";
-export const StageTwo = ({ children }) => {
+export const StageTwo = ({ formRef }) => {
   const { state } = useContext(Store);
   const switchCost = state => {
-    switch (state.services) {
-      case "brandIdentity":
+    switch (state.projectType) {
+      case "brand identity":
         return <BrandIdentity />;
-      case "webDevelopment":
+      case "web development":
         return <WebDevelopment />;
-      case "mobileApplication":
+      case "mobile application":
         return <MobileApplication />;
       default:
         return <BrandIdentity />;

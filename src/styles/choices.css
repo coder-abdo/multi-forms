@@ -12,7 +12,10 @@
   font-size: 1.6vw;
   color: var(--dark-grey);
   margin-top: 3vh;
-  .input[type="radio"] {
+  label:hover {
+    cursor: pointer;
+  }
+  .input[type="checkbox"] {
     opacity: 0;
     visibility: hidden;
     &:checked + .icon {

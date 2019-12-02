@@ -1,24 +1,30 @@
 import React, { createContext, useReducer } from "react";
+export const TYPE = "TYPE";
 export const NEXT_MOVE = "NEXT_MOVE";
 export const BACK_MOVE = "BACK_MOVE";
-export const BRAND_IDENTITY = "BRAND_IDENTITY";
-export const MOBILE_APPLICATION = "MOBILE_APPLICATION";
-export const WEB_DEVELOPMENT = "WEB_DEVELOPMENT";
-export const COST = "COST";
+export const ADD_SERVICES = "ADD_SERVICES";
+export const REMOVE_SERVICES = "REMOVE_SERVICES";
+export const USER_DETAILS = "USER_DETAILS";
+export const USER_CHOICE = "USER_CHOICE";
 const InitialState = {
-  step: 0,
-  isCompleted: false,
-  services: "",
-  user: null,
-  cost: 0
+  projectType: "",
+  inputType: "",
+  step: 1,
+  services: [],
+  user: null
 };
 const reducers = (state, { type, payload }) => {
   switch (type) {
+    case TYPE:
+      return {
+        ...state,
+        projectType: payload
+      };
     case NEXT_MOVE:
-      if (state.step >= 2) {
+      if (state.step > 4) {
         return {
           ...state,
-          step: 2
+          step: 4
         };
       }
       return {
@@ -26,38 +32,35 @@ const reducers = (state, { type, payload }) => {
         step: state.step + 1
       };
     case BACK_MOVE:
-      if (state.step <= 0) {
+      if (state.step < 1) {
         return {
           ...state,
-          step: 0
+          step: 1
         };
       }
       return {
         ...state,
         step: state.step - 1
       };
-    case BRAND_IDENTITY:
+    case ADD_SERVICES:
       return {
         ...state,
-        isCompleted: true,
-        services: "brandIdentity"
+        services: [...state.services, payload]
       };
-    case MOBILE_APPLICATION:
+    case REMOVE_SERVICES:
       return {
         ...state,
-        isCompleted: true,
-        services: "mobileApplication"
+        services: state.services.filter(service => service.id !== payload)
       };
-    case WEB_DEVELOPMENT:
+    case USER_DETAILS:
       return {
         ...state,
-        isCompleted: true,
-        services: "webDevelopment"
+        user: payload
       };
-    case COST:
+    case USER_CHOICE:
       return {
         ...state,
-        cost: payload
+        inputType: payload
       };
     default:
       return state;

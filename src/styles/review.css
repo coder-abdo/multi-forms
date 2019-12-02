@@ -1,0 +1,23 @@
+.mainTitle {
+  color: var(--green);
+  font-size: 3vw;
+  margin-bottom: 3vh;
+  text-transform: capitalize;
+  text-align: center;
+}
+.user {
+  background-color: var(--white);
+  padding: 2vh 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dark);
+  text-transform: capitalize;
+  .detail {
+    font-size: 2vw;
+    font-weight: 400;
+    &:not(:last-child) {
+      margin-bottom: 2vh;
+    }
+  }
+}
