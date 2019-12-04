@@ -41,7 +41,7 @@ export const MobileApplication = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>what services do you need?</h2>
       {labels.map(label => (
-        <div className={styles.inputContainer}>
+        <div className={styles.inputContainer} key={label.id}>
           <label htmlFor={label.id}>{label.text}</label>
           <input
             type="checkbox"

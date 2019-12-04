@@ -1,16 +1,21 @@
 import React, { useContext, useState } from "react";
-import { Store, USER_DETAILS } from "../Store.js";
+import { Store, USER_DETAILS, SET_ERRORS } from "../Store.js";
 import { FaCheckCircle } from "react-icons/fa";
 import styles from "../styles/contact.css";
 export const StageThree = () => {
   const { state, dispatch } = useContext(Store);
-  const [name, setName] = useState("");
-  const [tel, setTel] = useState("");
-  const [email, setEmail] = useState("");
+  let user;
+  if (state.user) {
+    user = state.user;
+  }
+  const [name, setName] = useState(user ? user.name : "");
+  const [tel, setTel] = useState(user ? user.tel : "");
+  const [email, setEmail] = useState(user ? user.email : "");
 
   const [inputType, setInputType] = useState("tel");
   const handleSubmit = e => {
     e.preventDefault();
+
     dispatch({
       type: USER_DETAILS,
       payload: {
@@ -31,7 +36,7 @@ export const StageThree = () => {
           type="tel"
           value={tel}
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-          placeholder="Enter Your Telephone Number"
+          placeholder="must be like this 000-00-000 ex: 111-22-333"
           onChange={e => setTel(e.target.value)}
           required
           className={styles.tel}
@@ -43,7 +48,7 @@ export const StageThree = () => {
           type="email"
           value={email}
           pattern="(\w.+)@[a-z]+\.[a-z]{2,4}"
-          placeholder="Enter Your Email"
+          placeholder="Enter Your Email ex: example@example.com"
           onChange={e => setEmail(e.target.value)}
           className={styles.email}
         />
@@ -56,7 +61,7 @@ export const StageThree = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>Enter Your Details below</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className={styles.parent}>
           <label htmlFor="name">name:</label>
           <input
             type="text"

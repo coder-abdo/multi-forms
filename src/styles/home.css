@@ -3,6 +3,11 @@
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
 }
+.error {
+  color: var(--danger);
+  padding: 2vh 2vw;
+  text-transform: capitalize;
+}
 .header {
   padding: 2vh 2vw;
   margin-bottom: 2vh;

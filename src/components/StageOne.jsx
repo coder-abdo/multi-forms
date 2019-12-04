@@ -6,6 +6,7 @@ import styles from "../styles/stage-one.css";
 export const StageOne = () => {
   const [type, setType] = useState("");
   const { state, dispatch } = useContext(Store);
+
   const types = [
     {
       text: "brand identity",

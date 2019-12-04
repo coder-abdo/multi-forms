@@ -10,7 +10,6 @@ export const Review = () => {
     }
   } = useContext(Store);
   const sum = arr => arr.reduce((prev, next) => prev + parseInt(next.val), 0);
-  console.log(services);
   return (
     <div>
       <h2 className={styles.mainTitle}>your purchase</h2>

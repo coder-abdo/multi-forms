@@ -4,10 +4,10 @@ import { StageTwo } from "./StageTwo.jsx";
 import { StageThree } from "./StageThree.jsx";
 import { Review } from "./Review.jsx";
 import styles from "../styles/home.css";
-import { NEXT_MOVE, BACK_MOVE, Store } from "../Store.js";
+import { NEXT_MOVE, BACK_MOVE, SET_ERRORS, Store } from "../Store.js";
 export const Home = () => {
   const {
-    state: { step },
+    state: { step, errors, projectType, services, user },
     dispatch
   } = useContext(Store);
 
@@ -26,6 +26,56 @@ export const Home = () => {
     }
   };
 
+  const handleNextMove = () => {
+    if (step === 1) {
+      if (projectType.length === 0) {
+        return dispatch({
+          type: SET_ERRORS,
+          payload: "please choose your project type!!"
+        });
+      } else {
+        dispatch({
+          type: SET_ERRORS,
+          payload: ""
+        });
+        dispatch({
+          type: NEXT_MOVE
+        });
+      }
+    } else if (step === 2) {
+      if (services.length === 0) {
+        return dispatch({
+          type: SET_ERRORS,
+          payload: "please choose the services you want"
+        });
+      } else {
+        dispatch({
+          type: SET_ERRORS,
+          payload: ""
+        });
+        dispatch({
+          type: NEXT_MOVE
+        });
+      }
+    } else if (step === 3) {
+      if (Object.keys(user).length === 0 || Object.keys(user).length < 2) {
+        dispatch({
+          type: SET_ERRORS,
+          payload: "please provide a valide details"
+        });
+      } else {
+        dispatch({
+          type: SET_ERRORS,
+          payload: ""
+        });
+        dispatch({ type: NEXT_MOVE });
+      }
+    } else {
+      return dispatch({
+        type: NEXT_MOVE
+      });
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -33,6 +83,7 @@ export const Home = () => {
         <h3>step {step} of 4</h3>
       </div>
       {showStages(step)}
+      {errors.length > 0 && <h3 className={styles.error}>{errors}</h3>}
       <div className={styles.buttonsContainer}>
         <button
           disabled={step < 1}
@@ -44,7 +95,7 @@ export const Home = () => {
         <button
           disabled={step >= 4}
           className={`${step <= 3 ? styles.show : styles.hide} ${styles.btn}`}
-          onClick={() => dispatch({ type: NEXT_MOVE })}
+          onClick={handleNextMove}
         >
           next
         </button>

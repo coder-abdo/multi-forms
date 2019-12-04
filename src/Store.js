@@ -6,12 +6,14 @@ export const ADD_SERVICES = "ADD_SERVICES";
 export const REMOVE_SERVICES = "REMOVE_SERVICES";
 export const USER_DETAILS = "USER_DETAILS";
 export const USER_CHOICE = "USER_CHOICE";
+export const SET_ERRORS = "SET_ERRORS";
 const InitialState = {
   projectType: "",
   inputType: "",
   step: 1,
   services: [],
-  user: null
+  errors: "",
+  user: {}
 };
 const reducers = (state, { type, payload }) => {
   switch (type) {
@@ -27,10 +29,12 @@ const reducers = (state, { type, payload }) => {
           step: 4
         };
       }
-      return {
-        ...state,
-        step: state.step + 1
-      };
+      if (!state.errors.length) {
+        return {
+          ...state,
+          step: state.step + 1
+        };
+      }
     case BACK_MOVE:
       if (state.step < 1) {
         return {
@@ -61,6 +65,11 @@ const reducers = (state, { type, payload }) => {
       return {
         ...state,
         inputType: payload
+      };
+    case SET_ERRORS:
+      return {
+        ...state,
+        errors: payload
       };
     default:
       return state;
