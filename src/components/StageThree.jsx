@@ -47,7 +47,7 @@ export const StageThree = () => {
         <input
           type="email"
           value={email}
-          pattern="(\w.+)@[a-z]+\.[a-z]{2,4}"
+          pattern="(\w.+)@[a-z]+\.[a-z]{2,4}'^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
           placeholder="Enter Your Email ex: example@example.com"
           onChange={e => setEmail(e.target.value)}
           className={styles.email}
