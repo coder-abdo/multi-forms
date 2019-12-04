@@ -26,6 +26,30 @@ export const Home = () => {
     }
   };
 
+  const handleUserDetailsErr = () => {
+    if (Object.keys(user).length === 0) {
+      dispatch({
+        type: SET_ERRORS,
+        payload: "please fill the input fields"
+      });
+    } else if (user["tel"] && user.inpuType === "tel") {
+      dispatch({
+        type: SET_ERRORS,
+        payload: "please fill the tel filed"
+      });
+    } else if (user["email"] && user.inpuType === "email") {
+      dispatch({
+        type: SET_ERRORS,
+        payload: "please fill the email field"
+      });
+    } else {
+      dispatch({
+        type: SET_ERRORS,
+        payload: ""
+      });
+      dispatch({ type: NEXT_MOVE });
+    }
+  };
   const handleNextMove = () => {
     if (step === 1) {
       if (projectType.length === 0) {
@@ -58,18 +82,7 @@ export const Home = () => {
         });
       }
     } else if (step === 3) {
-      if (Object.keys(user).length === 0 || Object.keys(user).length < 2) {
-        dispatch({
-          type: SET_ERRORS,
-          payload: "please provide a valide details"
-        });
-      } else {
-        dispatch({
-          type: SET_ERRORS,
-          payload: ""
-        });
-        dispatch({ type: NEXT_MOVE });
-      }
+      handleUserDetailsErr();
     } else {
       return dispatch({
         type: NEXT_MOVE
